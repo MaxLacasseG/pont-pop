@@ -8,18 +8,17 @@ public class Timer : MonoBehaviour {
     public bool timeOver;
     public int startTime = 10;
 
-    int _timeInSeconds;
-
     // Start is called before the first frame update
     void Start () {
         ResetTimer ();
-        StartTimer ();
+        // Initialize with GameManager round time
+        // StartTimer ();
     }
 
     void ResetTimer () {
         timeOver = false;
-        _timeInSeconds = startTime;
-        slider.value = _timeInSeconds / startTime;
+        startTime = GameMngr.instance.remaining_time;
+        slider.value = GameMngr.instance.remaining_time / startTime;
     }
 
     void StartTimer () {
@@ -27,16 +26,16 @@ public class Timer : MonoBehaviour {
     }
 
     public IEnumerator ReduceTimer () {
-        while (_timeInSeconds > 0) {
+        while (GameMngr.instance.remaining_time > 0) {
             yield return new WaitForSeconds (1.0f);
-            _timeInSeconds--;
-            Debug.Log (_timeInSeconds);
+            GameMngr.instance.remaining_time--;
+            Debug.Log (GameMngr.instance.remaining_time);
         }
         timeOver = true;
     }
 
     public void Update () {
-        slider.value = Mathf.Lerp (slider.value, (float) _timeInSeconds / startTime, 5f * Time.deltaTime);
+        slider.value = Mathf.Lerp (slider.value, (float) GameMngr.instance.remaining_time / startTime, 5f * Time.deltaTime);
     }
 
 }
