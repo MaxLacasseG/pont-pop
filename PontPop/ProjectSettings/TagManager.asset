@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - GameMngr
+  - Mngr
+  - Regular_anchor
+  - Level_anchor
   layers:
   - Default
   - TransparentFX

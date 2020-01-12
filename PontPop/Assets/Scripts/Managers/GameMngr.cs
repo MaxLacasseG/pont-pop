@@ -13,6 +13,7 @@ public class GameMngr : MonoBehaviour {
     // GAME EVENTS
     public delegate void GameEvent ();
     public static GameEvent onGameStart;
+    public static GameEvent onGamePause;
     public static GameEvent onRoundStart;
     public static GameEvent onBridgeInauguration;
     public static GameEvent onRoundEnd;
@@ -56,7 +57,7 @@ public class GameMngr : MonoBehaviour {
         if (instance == null) {
             instance = this;
             DontDestroyOnLoad (gameObject);
-            //InstantiateSubManagers ();
+            InstantiateSubManagers ();
             ResetStats ();
         } else {
             Destroy (gameObject);
@@ -65,14 +66,12 @@ public class GameMngr : MonoBehaviour {
 
     //REGISTERS GAME EVENTS
     void OnEnable () {
-        onGameStart += OnGameStart;
-        onGameEnd += OnGameEnd;
+
     }
 
     //UNREGISTERS GAME EVENTS
     void OnDisable () {
-        onGameStart -= OnGameStart;
-        onGameEnd -= OnGameEnd;
+
     }
 
     public void Start () {
@@ -91,11 +90,19 @@ public class GameMngr : MonoBehaviour {
     #region === Game Events ===
     public void OnGameStart () {
         Debug.Log ("Game Start");
+        onGameStart ();
+        //Resets UI
+    }
+
+    public void OnGamePause () {
+        Debug.Log ("Game Pause");
+        onGamePause ();
         //Resets UI
     }
 
     public void OnGameEnd () {
         Debug.Log ("GAme END");
+        onGameEnd ();
         //LvlManager.StartLevel ("Intro");
     }
     public void OnRoundStart () {
@@ -118,6 +125,7 @@ public class GameMngr : MonoBehaviour {
         is_gravity_on = true;
         is_paused = true;
         can_play = false;
+        onBridgeInauguration ();
     }
     #endregion
 
