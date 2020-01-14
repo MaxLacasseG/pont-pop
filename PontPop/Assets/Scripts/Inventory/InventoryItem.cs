@@ -11,11 +11,11 @@ public class InventoryItem : MonoBehaviour, IPointerDownHandler {
     public bool isDragging;
 
     public void OnPointerDown (PointerEventData eventData) {
+        Debug.Log ("Click");
         if (!isBusy) {
             isBusy = true;
             isDragging = true;
-            clone = Instantiate (prefab, Vector2.zero, Quaternion.identity, prefabParent);
-
+            clone = Instantiate (prefab, Vector2.zero, Quaternion.identity, null);
         }
     }
 

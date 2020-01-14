@@ -23,6 +23,9 @@ public class Inventory : MonoBehaviour {
         onPreviousPanel -= selectPreviousPanel;
     }
 
+    void OnStart () {
+        selectedPanel = panels[0];
+    }
     public void selectNextPanel () {
         selectedPanel.gameObject.SetActive (false);
         int newIndex = index + 1 >= panels.Count? 0 : index + 1;

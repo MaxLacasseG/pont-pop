@@ -1,6 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+[System.Serializable]
+public class Connection : MonoBehaviour {
+    public GameObject from;
+    public GameObject to;
+}
 
 [System.Serializable]
 public class GameMngr : MonoBehaviour {
@@ -49,6 +54,7 @@ public class GameMngr : MonoBehaviour {
     public string last_name = "";
 
     public ArrayList pieces = new ArrayList ();
+    public Dictionary<GameObject, List<Connection>> connections;
 
     #region UnityHooks
 
@@ -135,6 +141,39 @@ public class GameMngr : MonoBehaviour {
         foreach (GameObject manager in managers) {
             Instantiate (manager, transform.position, transform.rotation, transform);
         }
+    }
+    public void AddToDictonnary (GameObject objectToAdd) {
+        if (!connections.ContainsKey (objectToAdd)) {
+            connections.Add (objectToAdd, new List<Connection> ());
+        }
+    }
+    public void RemoveFromDictonnary (GameObject objectToRemove) {
+        if (connections.ContainsKey (objectToRemove)) {
+            connections.Remove (objectToRemove);
+        }
+    }
+    public void AddConnexion (GameObject from, GameObject to) {
+        List<Connection> list;
+        Connection conn = new Connection ();
+        conn.from = from;
+        conn.to = to;
+        connections.TryGetValue (from, out list);
+
+        if (!list.Contains (conn)) {
+            list.Add (conn);
+        };
+    }
+
+    public void RemoveConnexion (GameObject from, GameObject to) {
+        List<Connection> list;
+        Connection conn = new Connection ();
+        conn.from = from;
+        conn.to = to;
+        connections.TryGetValue (from, out list);
+
+        if (list.Contains (conn)) {
+            list.Remove (conn);
+        };
     }
 
     private void ResetStats () {

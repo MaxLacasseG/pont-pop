@@ -26,6 +26,18 @@ public class Anchor : MonoBehaviour {
         parent = transform.parent.gameObject;
     }
 
+    private void OnEnable () {
+        //GameMngr.instance.AddToDictonnary (gameObject);
+        //Debug.Log (GameMngr.instance.connections.Keys.Count);
+    }
+
+    private void OnDisable () {
+        //GameMngr.instance.RemoveFromDictonnary (gameObject);
+        //foreach (GameObject go in GameMngr.instance.connections.Keys) {
+        //Debug.Log (go.name);
+        //}
+    }
+
     void OnTriggerEnter2D (Collider2D other) {
         if (other.tag != "Level_anchor" && other.tag != "Regular_anchor") return;
 
