@@ -6,24 +6,30 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/GameScreen.unity
-    guid: bd95202fe10da48aa99c4807bf430138
-  - enabled: 1
     path: Assets/Scenes/SplashScreen.unity
     guid: fa70e7c0ff7dd493fbb7b99ed17cb870
-  - enabled: 1
-    path: Assets/Scenes/OptionMenu.unity
-    guid: 2aac9de8e444b43dd9604fe7b783b5a2
-  - enabled: 1
-    path: Assets/Scenes/MainMenu.unity
-    guid: 807945d399c0a40c1b3164c52cbeed47
   - enabled: 1
     path: Assets/Scenes/TitleScreen.unity
     guid: fc176404980a74e5ca14aa29172b7f0b
   - enabled: 1
-    path: Assets/Scenes/Credits.unity
-    guid: a7e1c19bc8a8a4009a608b3d15c09e8a
+    path: Assets/Scenes/MainMenu.unity
+    guid: 807945d399c0a40c1b3164c52cbeed47
+  - enabled: 1
+    path: Assets/Scenes/InstructionsScreen.unity
+    guid: 9aa84bf163d5e418a937f6e7e2827c8e
+  - enabled: 1
+    path: Assets/Scenes/GameScreen.unity
+    guid: bd95202fe10da48aa99c4807bf430138
   - enabled: 1
     path: Assets/Scenes/Score.unity
     guid: a5e02bdb3147445ae86c7dd7d2833cd8
+  - enabled: 1
+    path: Assets/Scenes/EndScreen.unity
+    guid: 0389d55209e374d7a8a7f8060dda2d77
+  - enabled: 1
+    path: Assets/Scenes/OptionMenu.unity
+    guid: 2aac9de8e444b43dd9604fe7b783b5a2
+  - enabled: 1
+    path: Assets/Scenes/Credits.unity
+    guid: a7e1c19bc8a8a4009a608b3d15c09e8a
   m_configObjects: {}

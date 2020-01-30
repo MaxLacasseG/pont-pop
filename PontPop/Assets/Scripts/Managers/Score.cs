@@ -18,9 +18,11 @@ public class Score : MonoBehaviour {
     public void UpdateUI () {
         scoreText.text = GameMngr.instance.score + " M$";
         int heartsToRemove = heartPanel.transform.childCount;
+
         for (int i = 0; i < heartsToRemove; i++) {
             Destroy (heartPanel.GetChild (i).gameObject);
         }
+
         for (int i = 0; i < GameMngr.instance.heart_amount; i++) {
             Instantiate (heartPrefab, Vector2.zero, Quaternion.identity, heartPanel);
         }

@@ -16,7 +16,6 @@ public class GamePiece : MonoBehaviour {
 
     public float distanceFromAnchor;
     public List<GameObject> anchors;
-    public bool canMove;
     public bool isMoving;
     public Color32 movingColor;
     public Color32 regularColor;
@@ -26,6 +25,8 @@ public class GamePiece : MonoBehaviour {
 
     public float lastClickTime;
     public float DOUBLE_CLICK_TIME = 0.2f;
+
+    public int cost;
 
     void OnEnable () {
         GameMngr.onBridgeInauguration += OnBridgeInauguration;
@@ -41,11 +42,12 @@ public class GamePiece : MonoBehaviour {
         rb.inertia = 1.0f;
 
         lastClickTime = Time.time;
-        canMove = true;
+
+        RoundMngr.instance.RemoveCostFromBudget (cost);
     }
 
     void OnMouseDown () {
-        if (!canMove) return;
+        if (!GameMngr.instance.can_play) return;
 
         float timeSinceClick = Time.time - lastClickTime;
         if (timeSinceClick <= DOUBLE_CLICK_TIME && timeSinceClick != 0) {
@@ -62,7 +64,7 @@ public class GamePiece : MonoBehaviour {
     }
 
     void OnMouseDrag () {
-        if (!canMove) return;
+        if (!GameMngr.instance.can_play) return;
 
         if (isMoving) {
             Vector2 newPos = Camera.main.ScreenToWorldPoint (Input.mousePosition);
@@ -71,7 +73,7 @@ public class GamePiece : MonoBehaviour {
     }
 
     void OnMouseUp () {
-        if (!canMove) return;
+        if (!GameMngr.instance.can_play) return;
 
         Vector2 newLocalScale = new Vector2 (0.5f, 0.5f);
         spriteRenderer.color = regularColor;
@@ -80,9 +82,14 @@ public class GamePiece : MonoBehaviour {
     }
 
     void OnBridgeInauguration () {
-        canMove = false;
         rb.gravityScale = 1.0f;
         rb.constraints = RigidbodyConstraints2D.None;
+    }
+
+    private void OnDestroy () {
+        if (GameMngr.instance.can_play) {
+            RoundMngr.instance.GiveMoneyBack (cost);
+        }
     }
 
 }

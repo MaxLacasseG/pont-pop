@@ -11,17 +11,15 @@ public class Timer : MonoBehaviour {
     // Start is called before the first frame update
     void Start () {
         ResetTimer ();
-        // Initialize with GameManager round time
-        // StartTimer ();
     }
 
-    void ResetTimer () {
+    public void ResetTimer () {
         timeOver = false;
         startTime = GameMngr.instance.remaining_time;
         slider.value = GameMngr.instance.remaining_time / startTime;
     }
 
-    void StartTimer () {
+    public void StartTimer () {
         StartCoroutine ("ReduceTimer");
     }
 
@@ -29,9 +27,14 @@ public class Timer : MonoBehaviour {
         while (GameMngr.instance.remaining_time > 0) {
             yield return new WaitForSeconds (1.0f);
             GameMngr.instance.remaining_time--;
-            Debug.Log (GameMngr.instance.remaining_time);
+            //Debug.Log (GameMngr.instance.remaining_time);
         }
         timeOver = true;
+        GameMngr.instance.OnBridgeInauguration ();
+    }
+
+    public void StopTimer () {
+        StopCoroutine ("ReduceTimer");
     }
 
     public void Update () {

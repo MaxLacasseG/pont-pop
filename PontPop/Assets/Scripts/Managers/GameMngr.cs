@@ -27,26 +27,27 @@ public class GameMngr : MonoBehaviour {
     // GAME CONSTANTS
     public const int MAX_ROUNDS = 3;
     public const int MAX_HEARTS = 3;
+    public const int TEST_TIME = 10;
 
-    public const int R1_BUDGET = 150;
-    public const int R2_BUDGET = 100;
-    public const int R3_BUDGET = 75;
+    public int r1_budget = 150;
+    public int r2_budget = 100;
+    public int r3_budget = 75;
 
-    public const int R1_TIME = 120;
-    public const int R2_TIME = 90;
-    public const int R3_TIME = 60;
+    public int r1_time = 120;
+    public int r2_time = 90;
+    public int r3_time = 60;
 
-    public const int R1_HEART_OBJ = 0;
-    public const int R2_HEART_OBJ = 0;
-    public const int R3_HEART_OBJ = 1;
+    public int r1_heart = 0;
+    public int r2_heart = 0;
+    public int r3_heart = 0;
 
     // GAME VARIABLES
     public bool can_play = false;
     public bool is_paused = false;
     public bool is_gravity_on = false;
 
-    public int remaining_time = 60;
     public int round_index = 0;
+    public int remaining_time = 60;
     public int heart_amount = 0;
     public int score = 0;
 
@@ -176,34 +177,34 @@ public class GameMngr : MonoBehaviour {
         };
     }
 
-    private void ResetStats () {
+    public void ResetStats () {
         is_gravity_on = false;
         is_paused = false;
         can_play = false;
 
         switch (round_index) {
             case 0:
-                score = R1_BUDGET;
+                score = r1_budget;
                 heart_amount = 0;
-                remaining_time = R1_TIME;
+                remaining_time = r1_time;
                 break;
 
             case 1:
-                score = R2_BUDGET;
+                score = r2_budget;
                 heart_amount = 0;
-                remaining_time = R2_TIME;
+                remaining_time = r2_time;
                 break;
 
             case 2:
-                score = R3_BUDGET;
+                score = r3_budget;
                 heart_amount = 0;
-                remaining_time = R3_TIME;
+                remaining_time = r3_time;
                 break;
 
             default:
-                score = R1_BUDGET;
+                score = r1_budget;
                 heart_amount = 0;
-                remaining_time = R1_TIME;
+                remaining_time = r1_time;
                 break;
         }
     }

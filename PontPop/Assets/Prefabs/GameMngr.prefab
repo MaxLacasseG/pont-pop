@@ -44,11 +44,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   managers: []
+  r1_budget: 150
+  r2_budget: 100
+  r3_budget: 75
+  r1_time: 120
+  r2_time: 90
+  r3_time: 60
+  r1_heart: 0
+  r2_heart: 0
+  r3_heart: 0
   can_play: 0
   is_paused: 0
   is_gravity_on: 0
-  remaining_time: 60
   round_index: 0
+  remaining_time: 60
   heart_amount: 0
   score: 0
   first_name: 

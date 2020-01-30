@@ -10,12 +10,17 @@ public class InventoryItem : MonoBehaviour, IPointerDownHandler {
     public bool isBusy;
     public bool isDragging;
 
+    private void Start () {
+        prefabParent = GameObject.FindGameObjectWithTag ("RoundMngr").transform;
+    }
+
     public void OnPointerDown (PointerEventData eventData) {
-        Debug.Log ("Click");
+        if (!GameMngr.instance.can_play) { return; }
+
         if (!isBusy) {
             isBusy = true;
             isDragging = true;
-            clone = Instantiate (prefab, Vector2.zero, Quaternion.identity, null);
+            clone = Instantiate (prefab, Vector2.zero, Quaternion.identity, prefabParent);
         }
     }
 
@@ -27,7 +32,7 @@ public class InventoryItem : MonoBehaviour, IPointerDownHandler {
             clone = null;
         }
 
-        if (isDragging) {
+        if (isDragging && GameMngr.instance.can_play) {
             Vector2 cursor = Camera.main.ScreenToWorldPoint (Input.mousePosition);
             clone.transform.position = new Vector2 (cursor.x, cursor.y);
         }
