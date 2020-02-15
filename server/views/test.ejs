@@ -7,6 +7,14 @@
         <title>Document</title>
     </head>
     <body>
-        <h2>Admin</h2>
+        <h2>Tous les scores de 2020</h2>
+        <% for (var team of teams) { %>
+            <p>
+        
+            <span>Équipe <%= team.team_number %> | </span>
+            <span>Pointage <%= team.score %></span>
+            </p>
+        <% } %>
+        
     </body>
 </html>

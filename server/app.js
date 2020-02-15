@@ -23,26 +23,54 @@ app.get("/", function(req, res) {
 });
 
 app.get("/get-final-info", function(req, res) {
-    GameController.GetData()
-        .then(res => {
-            return res.status(200).json(res);
+    GameController.GetData(req.query)
+        .then(results => {
+            console.log(req.query);
+
+            return res.status(200).json(results);
+        })
+        .catch(err => {
+            return res.status(400).json(err);
+        });
+});
+app.get("/get-teams", function(req, res) {
+    GameController.GetAllTeams()
+        .then(teams => {
+            return res.status(200).json(teams);
         })
         .catch(err => {
             return res.status(400).json(err);
         });
 });
 
-app.post("/save-final-info", function(req, res) {
-    logger.info(req.body);
+app.get("/finale-2020", function(req, res) {
+    GameController.GetAllTeams()
+        .then(teams => {
+            console.log(teams);
+
+            return res.render("test", { teams });
+        })
+        .catch(err => {
+            return res.status(400).json(err);
+        });
+});
+
+app.post("/save-score", function(req, res) {
     GameController.SaveData(req.body)
         .then(saveData => {
-            console.log(saveData);
+            return res.status(200).json(saveData);
+        })
+        .catch(err => {
+            return res.status(400).json(err);
+        });
+});
 
+app.post("/create-team", function(req, res) {
+    GameController.Create(req.body)
+        .then(saveData => {
             return res.send("Enregistrement réussi");
         })
         .catch(err => {
-            console.log(err);
-
             return res.send(err);
         });
 });

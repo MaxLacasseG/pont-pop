@@ -1,22 +1,36 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Networking;
 
 public class SendFinalData : MonoBehaviour {
-    ScoreInfos data;
+    [SerializeField]
+    public ScoreInfos data;
+    public ScoreInfos response;
+    public TMP_Text responseBox;
+    public TMP_Text errorBox;
+
+    public string month;
+    public string day;
+    public string hour;
+    public string minute;
+
     public void SendData () {
         StartCoroutine (Upload ());
     }
 
     IEnumerator Upload () {
+        responseBox.text = "";
+        errorBox.text = "";
+
         WWWForm form = new WWWForm ();
-        string url = "http://localhost:5000/save-final-info";
+        string url = "http://localhost:5000/save-score";
 
         data = new ScoreInfos ();
-        data.dateTime = new DateTime ();
-        data.gameId = 2020;
+        data.gameId = "2020";
         data.team_number = GameMngr.instance.team_number;
         data.team_pwd = GameMngr.instance.team_pwd;
         data.score = GameMngr.instance.final_score;
@@ -35,7 +49,21 @@ public class SendFinalData : MonoBehaviour {
         if (uwr.isNetworkError) {
             Debug.Log ("Error While Sending: " + uwr.error);
         } else {
-            Debug.Log ("Received: " + uwr.downloadHandler.text);
+            try {
+                response = JsonUtility.FromJson<ScoreInfos> (uwr.downloadHandler.text);
+                if (response.msg != String.Empty) {
+                    errorBox.text = response.msg;
+                }
+
+                if (response.attempts != 0) {
+                    responseBox.text = "Pointage sauvegardé. Il vous reste " + response.attempts + " essais";
+                    DateTime datetime = DateTime.ParseExact (response.dateTime, "YYYY-MM-DD", CultureInfo.InvariantCulture);
+                    Debug.Log (response.dateTime);
+                }
+
+            } catch (System.Exception err) {
+                Debug.Log (err.Message);
+            }
         }
     }
 }
