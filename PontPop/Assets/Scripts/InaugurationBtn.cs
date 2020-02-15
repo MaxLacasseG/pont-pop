@@ -5,7 +5,9 @@ using UnityEngine;
 public class InaugurationBtn : MonoBehaviour {
 
     public void InaugurateBridge () {
-        GetComponent<AudioSource> ().enabled = true;
-        GameMngr.instance.OnBridgeInauguration ();
+        if (GameMngr.instance.can_play) {
+            GetComponent<AudioSource> ().enabled = true;
+            GameMngr.instance.OnBridgeInauguration ();
+        }
     }
 }

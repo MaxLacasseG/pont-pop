@@ -1,18 +1,26 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
 public class SendFinalData : MonoBehaviour {
-    PlayerData data;
+    ScoreInfos data;
     public void SendData () {
         StartCoroutine (Upload ());
     }
 
     IEnumerator Upload () {
         WWWForm form = new WWWForm ();
-        string url = "http://localhost:5000/test";
-        data = new PlayerData ();
+        string url = "http://localhost:5000/save-final-info";
+
+        data = new ScoreInfos ();
+        data.dateTime = new DateTime ();
+        data.gameId = 2020;
+        data.team_number = GameMngr.instance.team_number;
+        data.team_pwd = GameMngr.instance.team_pwd;
+        data.score = GameMngr.instance.final_score;
+
         var jsonData = JsonUtility.ToJson (data);
 
         var uwr = new UnityWebRequest (url, "POST");

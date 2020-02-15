@@ -27,7 +27,8 @@ public class GamePiece : MonoBehaviour {
     public float DOUBLE_CLICK_TIME = 0.2f;
 
     public int cost;
-
+    public int solidity;
+    public int heart_amount;
     void OnEnable () {
         GameMngr.onBridgeInauguration += OnBridgeInauguration;
     }
@@ -44,6 +45,9 @@ public class GamePiece : MonoBehaviour {
         lastClickTime = Time.time;
 
         RoundMngr.instance.RemoveCostFromBudget (cost);
+        RoundMngr.instance.solidity += solidity;
+        GameMngr.instance.heart_amount = Mathf.Clamp (GameMngr.instance.heart_amount + heart_amount, 0, 3);
+        RoundMngr.instance.UpdateUI ();
     }
 
     void OnMouseDown () {
@@ -88,7 +92,10 @@ public class GamePiece : MonoBehaviour {
 
     private void OnDestroy () {
         if (GameMngr.instance.can_play) {
+            RoundMngr.instance.solidity -= solidity;
             RoundMngr.instance.GiveMoneyBack (cost);
+            GameMngr.instance.heart_amount = Mathf.Clamp (GameMngr.instance.heart_amount - heart_amount, 0, 3);
+            RoundMngr.instance.UpdateUI ();
         }
     }
 

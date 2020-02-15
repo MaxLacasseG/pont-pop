@@ -15,6 +15,7 @@ public class InventoryItem : MonoBehaviour, IPointerDownHandler {
     }
 
     public void OnPointerDown (PointerEventData eventData) {
+        Debug.Log ("lcik");
         if (!GameMngr.instance.can_play) { return; }
 
         if (!isBusy) {

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 288020094067226246}
   m_Layer: 0
   m_Name: RoundMngr
-  m_TagString: Untagged
+  m_TagString: RoundMngr
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -44,5 +44,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timer: {fileID: 0}
+  bonusText: {fileID: 0}
+  vehiculeSpawner: {fileID: 0}
   score: {fileID: 0}
   inaugurationButton: {fileID: 0}
+  testTime: 0
+  brokenTime: 3
+  vehiculeWeight: 0
+  solidity: 0
+  bridgeInaugurated: 0
+  isBroken: 0
+  sceneMngr: {fileID: 0}

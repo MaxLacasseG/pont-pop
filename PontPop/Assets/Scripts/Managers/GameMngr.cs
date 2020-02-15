@@ -29,30 +29,50 @@ public class GameMngr : MonoBehaviour {
     public const int MAX_HEARTS = 3;
     public const int TEST_TIME = 10;
 
-    public int r1_budget = 150;
-    public int r2_budget = 100;
-    public int r3_budget = 75;
-
+    [Space]
     public int r1_time = 120;
-    public int r2_time = 90;
-    public int r3_time = 60;
-
+    public int r1_budget = 150;
+    public int r1_aesthetic = 0;
+    public int r1_solidity = 0;
     public int r1_heart = 0;
+    public int r1_total = 0;
+    [Space]
+    public int r2_time = 90;
+    public int r2_budget = 100;
+    public int r2_aesthetic = 0;
+    public int r2_solidity = 0;
     public int r2_heart = 0;
-    public int r3_heart = 0;
+    public int r2_total = 0;
 
+    [Space]
+    public int r3_time = 60;
+    public int r3_budget = 75;
+    public int r3_aesthetic = 0;
+    public int r3_solidity = 0;
+    public int r3_heart = 0;
+    public int r3_total = 0;
+
+    [Space]
+    public int bonus = 1;
+    public int vehiculesAmount = 0;
+    [Space]
     // GAME VARIABLES
     public bool can_play = false;
     public bool is_paused = false;
     public bool is_gravity_on = false;
+    public bool is_broken = false;
 
     public int round_index = 0;
     public int remaining_time = 60;
     public int heart_amount = 0;
+    public int solidity = 0;
     public int score = 0;
+    public int final_score = 0;
 
     public string first_name = "";
     public string last_name = "";
+    public string team_number = "";
+    public string team_pwd = "";
 
     public ArrayList pieces = new ArrayList ();
     public Dictionary<GameObject, List<Connection>> connections;
@@ -91,6 +111,7 @@ public class GameMngr : MonoBehaviour {
             //EventManager.TriggerEvent (GameActions.OnNewGame);
             //EventManager.OnGameStart ();
         }
+
     }
     #endregion
 
@@ -110,7 +131,8 @@ public class GameMngr : MonoBehaviour {
     public void OnGameEnd () {
         Debug.Log ("GAme END");
         onGameEnd ();
-        //LvlManager.StartLevel ("Intro");
+        Destroy (this.gameObject);
+        //LvlManager.StartLevel  ("Intro");
     }
     public void OnRoundStart () {
         Debug.Log ("Round start");
@@ -187,24 +209,35 @@ public class GameMngr : MonoBehaviour {
                 score = r1_budget;
                 heart_amount = 0;
                 remaining_time = r1_time;
+                solidity = 0;
+                bonus = 1;
                 break;
 
             case 1:
                 score = r2_budget;
                 heart_amount = 0;
                 remaining_time = r2_time;
+                solidity = 0;
+                bonus = 1;
+
                 break;
 
             case 2:
                 score = r3_budget;
                 heart_amount = 0;
                 remaining_time = r3_time;
+                solidity = 0;
+                bonus = 1;
+
                 break;
 
             default:
                 score = r1_budget;
                 heart_amount = 0;
                 remaining_time = r1_time;
+                solidity = 0;
+                bonus = 1;
+
                 break;
         }
     }

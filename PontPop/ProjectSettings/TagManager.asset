@@ -9,6 +9,10 @@ TagManager:
   - Regular_anchor
   - Level_anchor
   - RoundMngr
+  - vehicule
+  - bridgeLimit
+  - bottomLimit
+  - destroyLimit
   layers:
   - Default
   - TransparentFX
@@ -18,8 +22,8 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
+  - vehicule
+  - topPieces
   - 
   - 
   - 

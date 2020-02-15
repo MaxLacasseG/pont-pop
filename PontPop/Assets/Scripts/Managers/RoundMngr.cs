@@ -1,15 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-
 public class RoundMngr : MonoBehaviour {
     public static RoundMngr instance;
 
     public Timer timer;
+    public TMP_Text bonusText;
+    public VehiculeSpawner vehiculeSpawner;
     public Score score;
     public Button inaugurationButton;
     public int testTime;
+    public int brokenTime;
+
+    public int vehiculeWeight;
+    public int solidity;
+    public bool bridgeInaugurated;
+    public bool isBroken;
     AudioClip clip;
     public SceneMngr sceneMngr;
 
@@ -31,6 +39,22 @@ public class RoundMngr : MonoBehaviour {
 
     void Start () {
         PrepareRound ();
+    }
+    private void Update () {
+        if (bridgeInaugurated) {
+            if (solidity <= vehiculeWeight && solidity > 0) {
+                DestroyPieces ();
+            }
+        }
+    }
+    public void DestroyPieces () {
+        if (bridgeInaugurated && !isBroken) {
+            isBroken = true;
+            GamePiece[] pieces = transform.GetComponentsInChildren<GamePiece> ();
+            foreach (var item in pieces) {
+                item.GetComponent<Collider2D> ().enabled = false;
+            }
+        }
     }
 
     public void PrepareRound () {
@@ -61,11 +85,11 @@ public class RoundMngr : MonoBehaviour {
     }
 
     public void OnBridgeInauguration () {
+        bridgeInaugurated = true;
         GameMngr.instance.can_play = false;
+
         TestBridge ();
         timer.StopTimer ();
-        // SHOW MESSAGE
-        //START CARS
     }
 
     public void TestBridge () {
@@ -75,18 +99,30 @@ public class RoundMngr : MonoBehaviour {
     public IEnumerator TestTimer () {
         while (testTime > 0) {
             yield return new WaitForSeconds (1.0f);
-            //ADD CARS
+            if (isBroken) {
+                StartCoroutine ("BrokenTimer");
+                StopCoroutine ("TestTimer");
+            };
+
+            vehiculeSpawner.SpawnVehicule ();
             testTime--;
-            Debug.Log (testTime);
+
         }
-        Debug.Log (testTime);
+        EndRound ();
+    }
+
+    public IEnumerator BrokenTimer () {
+        while (brokenTime > 0) {
+            yield return new WaitForSeconds (1.0f);
+            brokenTime--;
+        }
         EndRound ();
     }
 
     public void EndRound () {
         SaveRoundInfos ();
         GameSounds.instance.Stop ();
-        CleanGamePieces ();
+        //CleanGamePieces ();
         GameMngr.instance.round_index++;
 
         GameMngr.instance.ResetStats ();
@@ -123,19 +159,24 @@ public class RoundMngr : MonoBehaviour {
             case (0):
                 GameMngr.instance.r1_budget = GameMngr.instance.score;
                 GameMngr.instance.r1_time = GameMngr.instance.remaining_time;
-                GameMngr.instance.r1_heart = GameMngr.instance.heart_amount;
+                GameMngr.instance.r1_heart = GameMngr.instance.heart_amount > 0 ? 100 * GameMngr.instance.heart_amount : GameMngr.instance.heart_amount;
+                GameMngr.instance.r1_solidity = GameMngr.instance.solidity > 0 ? 10 * GameMngr.instance.solidity : GameMngr.instance.solidity;
+                GameMngr.instance.r1_total = (GameMngr.instance.r1_budget + GameMngr.instance.r1_time + GameMngr.instance.r1_heart + GameMngr.instance.r1_solidity) * GameMngr.instance.bonus;
+
                 break;
             case (1):
                 GameMngr.instance.r2_budget = GameMngr.instance.score;
                 GameMngr.instance.r2_time = GameMngr.instance.remaining_time;
-                GameMngr.instance.r2_heart = GameMngr.instance.heart_amount;
-
+                GameMngr.instance.r2_heart = GameMngr.instance.heart_amount > 0 ? 100 * GameMngr.instance.heart_amount : GameMngr.instance.heart_amount;
+                GameMngr.instance.r2_solidity = GameMngr.instance.solidity > 0 ? 10 * GameMngr.instance.solidity : GameMngr.instance.solidity;
+                GameMngr.instance.r2_total = (GameMngr.instance.r2_budget + GameMngr.instance.r2_time + GameMngr.instance.r2_heart + GameMngr.instance.r2_solidity) * GameMngr.instance.bonus;
                 break;
             case (2):
                 GameMngr.instance.r3_budget = GameMngr.instance.score;
                 GameMngr.instance.r3_time = GameMngr.instance.remaining_time;
-                GameMngr.instance.r3_heart = GameMngr.instance.heart_amount;
-
+                GameMngr.instance.r3_heart = GameMngr.instance.heart_amount > 0 ? 100 * GameMngr.instance.heart_amount : GameMngr.instance.heart_amount;
+                GameMngr.instance.r3_solidity = GameMngr.instance.solidity > 0 ? 10 * GameMngr.instance.solidity : GameMngr.instance.solidity;
+                GameMngr.instance.r3_total = (GameMngr.instance.r3_budget + GameMngr.instance.r3_time + GameMngr.instance.r3_heart + GameMngr.instance.r3_solidity) * GameMngr.instance.bonus;
                 break;
             default:
                 break;
