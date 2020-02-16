@@ -9,7 +9,6 @@ public class SceneMngr : MonoBehaviour {
         //Register to GameManager
         GameMngr.onGameEnd += Restart;
         GameMngr.onGamePause += Pause;
-        Debug.Log ("scene count: " + SceneManager.sceneCountInBuildSettings);
         //SceneManager.LoadScene (2);
     }
 

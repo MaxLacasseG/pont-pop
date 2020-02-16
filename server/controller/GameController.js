@@ -5,6 +5,7 @@ const controller = {};
 controller.GetAllTeams = () => {
     return GameData.find({})
         .select("-team_pwd")
+        .sort("-score")
         .then(res => {
             logger.info(res);
 
@@ -66,6 +67,33 @@ controller.Create = gameInfos => {
         })
         .catch(err => {
             throw err;
+        });
+};
+controller.CreateMany = async gameInfos => {
+    const tab = gameInfos.gameInfos.map(g => {
+        return new Promise((resolve, reject) => {
+            const newGameInfos = new GameData(g);
+            return newGameInfos
+                .save()
+                .then(res => {
+                    resolve(res);
+                })
+                .catch(err => {
+                    reject(err);
+                });
+        });
+    });
+
+    return await Promise.all(tab)
+        .then(resTab => {
+            console.log(resTab);
+
+            return resTab;
+        })
+        .catch(err => {
+            console.log(err);
+
+            return err;
         });
 };
 

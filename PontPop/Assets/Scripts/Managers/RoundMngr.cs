@@ -81,7 +81,8 @@ public class RoundMngr : MonoBehaviour {
     public void StartRound () {
         timer.StartTimer ();
         GameMngr.instance.can_play = true;
-        GameSounds.instance.Play (clip);
+        GameSounds.instance.audioSource.clip = clip;
+        GameSounds.instance.PlayLoop ();
     }
 
     public void OnBridgeInauguration () {

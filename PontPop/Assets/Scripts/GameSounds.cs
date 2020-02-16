@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameSounds : MonoBehaviour {
     public static GameSounds instance;
-    AudioSource audioSource;
+    public AudioSource audioSource;
     public AudioClip R1_soundtrack;
     public AudioClip R2_soundtrack;
     public AudioClip R3_soundtrack;
@@ -23,6 +23,9 @@ public class GameSounds : MonoBehaviour {
     }
     public void Play (AudioClip clip) {
         audioSource.PlayOneShot (clip);
+    }
+    public void PlayLoop () {
+        audioSource.Play ();
     }
     public void Stop () {
         audioSource.Stop ();

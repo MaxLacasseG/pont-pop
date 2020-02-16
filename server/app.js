@@ -13,7 +13,7 @@ mongoose.connect("mongodb://localhost:27017/pontpop", { useNewUrlParser: true },
 });
 
 app.set("view engine", "ejs");
-app.use(express.static("build"));
+app.use(express.static("public"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -71,6 +71,19 @@ app.post("/create-team", function(req, res) {
             return res.send("Enregistrement réussi");
         })
         .catch(err => {
+            return res.send(err);
+        });
+});
+app.post("/create-teams", function(req, res) {
+    GameController.CreateMany(req.body)
+        .then(saveData => {
+            console.log(saveData);
+
+            return res.send("Enregistrement réussi");
+        })
+        .catch(err => {
+            console.log(err);
+
             return res.send(err);
         });
 });

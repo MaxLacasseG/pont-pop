@@ -6,6 +6,7 @@ const GameDataSchema = new Schema({
     gameId: { type: String, required: true },
     datetime: { type: String },
     team_number: { type: String, required: true },
+    team_name: { type: String },
     team_pwd: { type: String, required: true, select: false },
     score: { type: Number, default: null },
     attempts: { type: Number, default: 10 }

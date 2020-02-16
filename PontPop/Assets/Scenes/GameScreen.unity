@@ -2193,6 +2193,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 537887482236414983, guid: 5b52b4f92c2d141bf887475694286208,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -24.999817
+      objectReference: {fileID: 0}
     - target: {fileID: 1115454675534282835, guid: 5b52b4f92c2d141bf887475694286208,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -2603,6 +2608,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6572363714225147218, guid: 5b52b4f92c2d141bf887475694286208,
+        type: 3}
+      propertyPath: m_text
+      value: X1
+      objectReference: {fileID: 0}
     - target: {fileID: 7538797401691779352, guid: 5b52b4f92c2d141bf887475694286208,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -2748,6 +2758,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: AudioManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 8457500393716373460, guid: 38eb4e2111f9549f8bca10cdbbdc2133,
+        type: 3}
+      propertyPath: Loop
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8457500393716373463, guid: 38eb4e2111f9549f8bca10cdbbdc2133,
         type: 3}
