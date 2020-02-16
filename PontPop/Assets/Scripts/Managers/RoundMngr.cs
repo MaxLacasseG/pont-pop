@@ -101,6 +101,15 @@ public class RoundMngr : MonoBehaviour {
         while (testTime > 0) {
             yield return new WaitForSeconds (1.0f);
             if (isBroken) {
+                GameMngr.instance.bonus = 1;
+                GameMngr.instance.score = 0;
+                GameMngr.instance.remaining_time = 0;
+                GameMngr.instance.woodPieces = 0;
+                GameMngr.instance.stonePieces = 0;
+                GameMngr.instance.steelPieces = 0;
+                bonusText.text = "1X";
+                UpdateUI ();
+
                 StartCoroutine ("BrokenTimer");
                 StopCoroutine ("TestTimer");
             };
@@ -159,25 +168,57 @@ public class RoundMngr : MonoBehaviour {
         switch (round_index) {
             case (0):
                 GameMngr.instance.r1_budget = GameMngr.instance.score;
-                GameMngr.instance.r1_time = GameMngr.instance.remaining_time;
+                GameMngr.instance.r1_time = (int) GameMngr.instance.remaining_time / 10;
                 GameMngr.instance.r1_heart = GameMngr.instance.heart_amount > 0 ? 100 * GameMngr.instance.heart_amount : GameMngr.instance.heart_amount;
                 GameMngr.instance.r1_solidity = GameMngr.instance.solidity > 0 ? 10 * GameMngr.instance.solidity : GameMngr.instance.solidity;
-                GameMngr.instance.r1_total = (GameMngr.instance.r1_budget + GameMngr.instance.r1_time + GameMngr.instance.r1_heart + GameMngr.instance.r1_solidity) * GameMngr.instance.bonus;
+                GameMngr.instance.r1_bonus = GameMngr.instance.bonus;
+                GameMngr.instance.r1_total = (GameMngr.instance.r1_aesthetic + GameMngr.instance.r1_budget + GameMngr.instance.r1_time + GameMngr.instance.r1_heart + GameMngr.instance.r1_solidity) * GameMngr.instance.bonus;
+
+                if ((GameMngr.instance.woodPieces > 0 && GameMngr.instance.steelPieces == 0 && GameMngr.instance.stonePieces == 0) || (GameMngr.instance.woodPieces == 0 && GameMngr.instance.steelPieces > 0 && GameMngr.instance.stonePieces == 0) || (GameMngr.instance.woodPieces == 0 && GameMngr.instance.steelPieces == 0 && GameMngr.instance.stonePieces > 0)) {
+                    int amount = GameMngr.instance.woodPieces + GameMngr.instance.stonePieces + GameMngr.instance.steelPieces;
+                    GameMngr.instance.r1_aesthetic = amount * 10;
+                }
+
+                if (GameMngr.instance.score > 0) {
+                    GameMngr.instance.r2_budget += GameMngr.instance.score;
+                }
+                if (GameMngr.instance.remaining_time > 0) {
+                    GameMngr.instance.r2_budget += (int) GameMngr.instance.remaining_time / 10;
+                }
 
                 break;
             case (1):
                 GameMngr.instance.r2_budget = GameMngr.instance.score;
-                GameMngr.instance.r2_time = GameMngr.instance.remaining_time;
+                GameMngr.instance.r2_time = (int) GameMngr.instance.remaining_time / 10;
                 GameMngr.instance.r2_heart = GameMngr.instance.heart_amount > 0 ? 100 * GameMngr.instance.heart_amount : GameMngr.instance.heart_amount;
                 GameMngr.instance.r2_solidity = GameMngr.instance.solidity > 0 ? 10 * GameMngr.instance.solidity : GameMngr.instance.solidity;
-                GameMngr.instance.r2_total = (GameMngr.instance.r2_budget + GameMngr.instance.r2_time + GameMngr.instance.r2_heart + GameMngr.instance.r2_solidity) * GameMngr.instance.bonus;
+                GameMngr.instance.r2_bonus = GameMngr.instance.bonus;
+                GameMngr.instance.r2_total = (GameMngr.instance.r2_aesthetic + GameMngr.instance.r2_budget + GameMngr.instance.r2_time + GameMngr.instance.r2_heart + GameMngr.instance.r2_solidity) * GameMngr.instance.bonus;
+
+                if ((GameMngr.instance.woodPieces > 0 && GameMngr.instance.steelPieces == 0 && GameMngr.instance.stonePieces == 0) || (GameMngr.instance.woodPieces == 0 && GameMngr.instance.steelPieces > 0 && GameMngr.instance.stonePieces == 0) || (GameMngr.instance.woodPieces == 0 && GameMngr.instance.steelPieces == 0 && GameMngr.instance.stonePieces > 0)) {
+                    int amount = GameMngr.instance.woodPieces + GameMngr.instance.stonePieces + GameMngr.instance.steelPieces;
+                    GameMngr.instance.r2_aesthetic = amount * 10;
+                }
+
+                if (GameMngr.instance.score > 0) {
+                    GameMngr.instance.r3_budget += GameMngr.instance.score;
+                }
+                if (GameMngr.instance.remaining_time > 0) {
+                    GameMngr.instance.r3_budget += (int) GameMngr.instance.remaining_time / 10;
+                }
                 break;
             case (2):
                 GameMngr.instance.r3_budget = GameMngr.instance.score;
-                GameMngr.instance.r3_time = GameMngr.instance.remaining_time;
+                GameMngr.instance.r3_time = (int) GameMngr.instance.remaining_time / 10;
                 GameMngr.instance.r3_heart = GameMngr.instance.heart_amount > 0 ? 100 * GameMngr.instance.heart_amount : GameMngr.instance.heart_amount;
                 GameMngr.instance.r3_solidity = GameMngr.instance.solidity > 0 ? 10 * GameMngr.instance.solidity : GameMngr.instance.solidity;
-                GameMngr.instance.r3_total = (GameMngr.instance.r3_budget + GameMngr.instance.r3_time + GameMngr.instance.r3_heart + GameMngr.instance.r3_solidity) * GameMngr.instance.bonus;
+                GameMngr.instance.r3_bonus = GameMngr.instance.bonus;
+                GameMngr.instance.r3_total = (GameMngr.instance.r3_aesthetic + GameMngr.instance.r3_budget + GameMngr.instance.r3_time + GameMngr.instance.r3_heart + GameMngr.instance.r3_solidity) * GameMngr.instance.bonus;
+
+                if ((GameMngr.instance.woodPieces > 0 && GameMngr.instance.steelPieces == 0 && GameMngr.instance.stonePieces == 0) || (GameMngr.instance.woodPieces == 0 && GameMngr.instance.steelPieces > 0 && GameMngr.instance.stonePieces == 0) || (GameMngr.instance.woodPieces == 0 && GameMngr.instance.steelPieces == 0 && GameMngr.instance.stonePieces > 0)) {
+                    int amount = GameMngr.instance.woodPieces + GameMngr.instance.stonePieces + GameMngr.instance.steelPieces;
+                    GameMngr.instance.r3_aesthetic = amount * 10;
+                }
                 break;
             default:
                 break;

@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GamePiece : MonoBehaviour {
+    public enum PieceType {
+        WOOD,
+        STONE,
+        STEEL
+    }
     /*
     TODO
     1- X DRAG N DROP
@@ -25,10 +30,13 @@ public class GamePiece : MonoBehaviour {
 
     public float lastClickTime;
     public float DOUBLE_CLICK_TIME = 0.2f;
+    Vector3 scaleBefore;
 
     public int cost;
     public int solidity;
     public int heart_amount;
+    public PieceType type = PieceType.WOOD;
+
     void OnEnable () {
         GameMngr.onBridgeInauguration += OnBridgeInauguration;
     }
@@ -41,13 +49,27 @@ public class GamePiece : MonoBehaviour {
         rb = GetComponent<Rigidbody2D> ();
         rb.centerOfMass = new Vector2 (0, 0);
         rb.inertia = 1.0f;
+        scaleBefore = transform.localScale;
 
         lastClickTime = Time.time;
 
         RoundMngr.instance.RemoveCostFromBudget (cost);
         RoundMngr.instance.solidity += solidity;
+
         GameMngr.instance.heart_amount = Mathf.Clamp (GameMngr.instance.heart_amount + heart_amount, 0, 3);
         RoundMngr.instance.UpdateUI ();
+
+        switch (type) {
+            case PieceType.WOOD:
+                GameMngr.instance.woodPieces++;
+                break;
+            case PieceType.STONE:
+                GameMngr.instance.stonePieces++;
+                break;
+            case PieceType.STEEL:
+                GameMngr.instance.steelPieces++;
+                break;
+        }
     }
 
     void OnMouseDown () {
@@ -59,6 +81,7 @@ public class GamePiece : MonoBehaviour {
         } else {
             isMoving = true;
             spriteRenderer.color = movingColor;
+            scaleBefore = transform.localScale;
             Vector2 newLocalScale = new Vector2 (0.52f, 0.52f);
             this.transform.localScale = newLocalScale;
         }
@@ -81,7 +104,7 @@ public class GamePiece : MonoBehaviour {
 
         Vector2 newLocalScale = new Vector2 (0.5f, 0.5f);
         spriteRenderer.color = regularColor;
-        this.transform.localScale = newLocalScale;
+        this.transform.localScale = scaleBefore;
         isMoving = false;
     }
 
@@ -96,6 +119,18 @@ public class GamePiece : MonoBehaviour {
             RoundMngr.instance.GiveMoneyBack (cost);
             GameMngr.instance.heart_amount = Mathf.Clamp (GameMngr.instance.heart_amount - heart_amount, 0, 3);
             RoundMngr.instance.UpdateUI ();
+
+            switch (type) {
+                case PieceType.WOOD:
+                    GameMngr.instance.woodPieces--;
+                    break;
+                case PieceType.STONE:
+                    GameMngr.instance.stonePieces--;
+                    break;
+                case PieceType.STEEL:
+                    GameMngr.instance.steelPieces--;
+                    break;
+            }
         }
     }
 

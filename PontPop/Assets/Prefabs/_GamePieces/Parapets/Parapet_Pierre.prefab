@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2307847847253917012}
   m_Layer: 9
   m_Name: Parapet_Pierre
-  m_TagString: Untagged
+  m_TagString: parapet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -108,9 +108,10 @@ MonoBehaviour:
   rb: {fileID: 0}
   lastClickTime: 0
   DOUBLE_CLICK_TIME: 0.2
-  cost: 10
-  solidity: 3
+  cost: 30
+  solidity: 5
   heart_amount: 0
+  type: 1
 --- !u!61 &4982157480354935236
 BoxCollider2D:
   m_ObjectHideFlags: 0

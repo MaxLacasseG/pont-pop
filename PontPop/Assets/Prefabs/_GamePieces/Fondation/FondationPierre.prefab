@@ -108,8 +108,10 @@ MonoBehaviour:
   rb: {fileID: 0}
   lastClickTime: 0
   DOUBLE_CLICK_TIME: 0.2
-  cost: 50
+  cost: 10
   solidity: 2
+  heart_amount: 0
+  type: 1
 --- !u!61 &8290556046279609588
 BoxCollider2D:
   m_ObjectHideFlags: 0

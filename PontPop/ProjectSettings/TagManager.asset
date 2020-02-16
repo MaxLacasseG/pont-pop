@@ -13,6 +13,8 @@ TagManager:
   - bridgeLimit
   - bottomLimit
   - destroyLimit
+  - blocked
+  - parapet
   layers:
   - Default
   - TransparentFX

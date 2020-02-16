@@ -44,24 +44,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   managers: []
-  r1_time: 900
-  r1_budget: 500
+  r1_time: 600
+  r1_budget: 400
   r1_aesthetic: 0
   r1_solidity: 0
   r1_heart: 1
   r1_total: 0
-  r2_time: 600
-  r2_budget: 350
+  r1_bonus: 1
+  r2_time: 450
+  r2_budget: 300
   r2_aesthetic: 0
   r2_solidity: 0
   r2_heart: 0
   r2_total: 0
-  r3_time: 450
-  r3_budget: 250
+  r2_bonus: 1
+  r3_time: 300
+  r3_budget: 200
   r3_aesthetic: 0
   r3_solidity: 0
   r3_heart: 0
   r3_total: 0
+  r3_bonus: 1
   bonus: 1
   vehiculesAmount: 0
   can_play: 0
@@ -74,6 +77,9 @@ MonoBehaviour:
   solidity: 0
   score: 0
   final_score: 0
+  woodPieces: 0
+  stonePieces: 0
+  steelPieces: 0
   first_name: 
   last_name: 
   team_number: 

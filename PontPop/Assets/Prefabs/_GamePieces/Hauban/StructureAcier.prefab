@@ -27,7 +27,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1249259461134723666}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.978, y: -0.25, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
@@ -108,9 +108,10 @@ MonoBehaviour:
   rb: {fileID: 0}
   lastClickTime: 0
   DOUBLE_CLICK_TIME: 0.2
-  cost: 50
+  cost: 150
   solidity: 5
   heart_amount: 0
+  type: 2
 --- !u!50 &1249259461134723671
 Rigidbody2D:
   serializedVersion: 4
@@ -145,7 +146,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.042938232, y: -1.9195993}
+  m_Offset: {x: 0.042938232, y: -0.025660753}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -156,5 +157,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 13.905033, y: 0.16080141}
+  m_Size: {x: 13.905033, y: 3.9486785}
   m_EdgeRadius: 0

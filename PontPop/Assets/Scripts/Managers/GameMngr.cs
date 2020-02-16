@@ -36,6 +36,7 @@ public class GameMngr : MonoBehaviour {
     public int r1_solidity = 0;
     public int r1_heart = 0;
     public int r1_total = 0;
+    public int r1_bonus = 1;
     [Space]
     public int r2_time = 90;
     public int r2_budget = 100;
@@ -43,6 +44,7 @@ public class GameMngr : MonoBehaviour {
     public int r2_solidity = 0;
     public int r2_heart = 0;
     public int r2_total = 0;
+    public int r2_bonus = 1;
 
     [Space]
     public int r3_time = 60;
@@ -51,6 +53,7 @@ public class GameMngr : MonoBehaviour {
     public int r3_solidity = 0;
     public int r3_heart = 0;
     public int r3_total = 0;
+    public int r3_bonus = 1;
 
     [Space]
     public int bonus = 1;
@@ -68,6 +71,10 @@ public class GameMngr : MonoBehaviour {
     public int solidity = 0;
     public int score = 0;
     public int final_score = 0;
+    [Space]
+    public int woodPieces = 0;
+    public int stonePieces = 0;
+    public int steelPieces = 0;
 
     public string first_name = "";
     public string last_name = "";
@@ -203,6 +210,11 @@ public class GameMngr : MonoBehaviour {
         is_gravity_on = false;
         is_paused = false;
         can_play = false;
+        is_broken = false;
+
+        woodPieces = 0;
+        stonePieces = 0;
+        steelPieces = 0;
 
         switch (round_index) {
             case 0:

@@ -108,9 +108,10 @@ MonoBehaviour:
   rb: {fileID: 0}
   lastClickTime: 0
   DOUBLE_CLICK_TIME: 0.2
-  cost: 50
+  cost: 250
   solidity: 10
   heart_amount: 1
+  type: 2
 --- !u!50 &5618887353577741151
 Rigidbody2D:
   serializedVersion: 4
